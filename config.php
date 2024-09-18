@@ -1,10 +1,13 @@
 <?php
 // Check if the user is logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    // Stop the session when the page is refreshed
-    if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_POST)) {
+    // Check if the session has been inactive for more than 30 minutes
+    if (isset($_SESSION['timeout']) && $_SESSION['timeout'] + 1800 < time()) {
         session_unset();
         session_destroy();
+    } else {
+        // Update the session timeout
+        $_SESSION['timeout'] = time();
     }
 }
 
