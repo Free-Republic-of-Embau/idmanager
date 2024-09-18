@@ -71,10 +71,7 @@ if (isset($_POST['create_id'])) {
     header("Location: index.php?message=" . urlencode($message));
     exit;
 }
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_GET['message'])) {
-    session_unset();
-    session_destroy();
-}
+
 ?>
 <html>
 <head>
